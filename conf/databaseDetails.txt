@@ -1,0 +1,94 @@
+=== Database Connection Details ============================
+
+server:		mysql.cs.iastate.edu
+database:	db309R14
+username:	u309R14
+password:	3Y22mNHby
+
+If you are using the MySQL command line utilities, you
+can connect to the server with the following command:
+
+  mysql -h mysql.cs.iastate.edu -u u309R14 -p db309R14
+  (You will then be prompted for your password.)
+
+=== The tables initially created ===========================
+
+create table db309R14.user (
+  user_id int(6) NOT NULL,
+  username varchar(8) NOT NULL,
+  password varchar(8) NOT NULL,
+  user_type varchar(20) NOT NULL,
+  created timestamp NOT NULL,
+  deleted timestamp,
+  email varchar(30),
+  phone_number varchar(15),
+  first_name varchar(20),
+  last_name varchar(20),
+  street varchar(50),
+  city varchar(30),
+  state varchar(20),
+  zip_code varchar(5),
+  interests varchar(400),
+  logged_in integer(6),
+  confirmed varchar(5),
+  card_holder varchar(30,
+  card_type varchar(30),
+  card_number varchar(30),
+  card_expire_date timestamp
+);
+
+create table db309R14.item (
+  item_id int(6) NOT NULL,
+  item_name varchar(20) NOT NULL,
+  item_cost double(6,2) NOT NULL,
+  item_type varchar(20),
+  description varchar(400),
+  quantity int(6),
+  image_source varchar(20),
+  created timestamp NOT NULL,
+  deleted timestamp,
+  seller_username varchar(8),
+  seller_id int(6),
+  amount_sold int(6),
+);
+
+create table db309R14.feedback (
+  rating int(5) NOT NULL,
+  comment varchar(400),
+  item_id int(6),
+  item_name varchar(20),
+  seller_id int(6),
+  seller_username varchar(8),
+  shopper_id int(6),
+  shopper_username varchar(8),
+  transaction_id int(6)
+);
+
+create table db309R14.transaction (
+  transaction_id int(6) NOT NULL,
+  seller_id int(6) NOT NULL,
+  seller_username varchar(8),
+  shopper_id int(6) NOT NULL,
+  shopper_username varchar(8),
+  item_id int(6) NOT NULL,
+  item_name varchar(20),
+  item_description varchar(400),
+  total_cost double(6,2) NOT NULL,
+  order_id int(6),
+  shipping_number varchar(20)
+);
+
+create table db309R14.fact (
+  fact_id int(6) NOT NULL UNIQUE,
+  fact varchar(400)
+);
+
+create table db309R14.shipment (
+  transaction_id int(6) NOT NULL,
+  method varchar(20) NOT NULL,
+  shipping_cost double(3,2) NOT NULL,
+  tracking_number varchar(20) NOT NULL,
+  status varchar(50),
+  ship_date timestamp,
+  arrival_date timestamp
+);
